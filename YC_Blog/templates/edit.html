@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h3>Only admin allows to add blog</h3>
+
+
+  <form name="addblog" id="addblog" method="post" action="/edit_post/{{post.id}}" validate>
+    <div class="control-group form-group">
+      <div class="controls">
+        <label>Title</label>
+        <input type="text" class="form-control" id="title" required data-validation-required-message="Please enter title." name="title">
+        <p class="help-block"></p>
+      </div>
+    </div>
+    <div class="control-group form-group">
+      <div class="controls">
+        <label>Slug</label>
+        <input type="text" class="form-control" id="slug" required data-validation-required-message="Please enter slug" name="slug">
+      </div>
+    </div>
+
+    <div class="control-group form-group">
+      <div class="controls">
+        <label>Content</label>
+        <textarea rows="10" cols="100" class="form-control" id="content" required data-validation-required-message="Please enter content" maxlength="5000" style="resize:none" name="content"></textarea>
+      </div>
+    </div>
+    <div id="success"></div>
+    <!-- For success/fail messages -->
+    <button type="submit" class="btn btn-primary" id="sendMessageButton">Update</button>
+  </form>
+
+
+
+{% endblock %}

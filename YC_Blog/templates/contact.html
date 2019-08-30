@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Contact Us.
+    </h1>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="index.html">Home</a>
+      </li>
+      <li class="breadcrumb-item active">Contact</li>
+    </ol>
+
+    <!-- Content Row -->
+    <div class="row">
+      <!-- Map Column -->
+      <div class="col-lg-8 mb-4">
+        <!-- Embedded Google Map -->
+        <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://local.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=yashwantrao+chavan+science+college+karad&sll=37.09024,-95.712891&sspn=35.631106,78.837891&ie=UTF8&hq=yashwantrao+chavan+science+college+karad&hnear=&radius=15000&t=h&ll=17.309763,74.18929&spn=0.003585,0.006437&z=17&output=embed"></iframe>
+      </div>
+      <!-- Contact Details Column -->
+      <div class="col-lg-4 mb-4">
+        <h3>Contact Details</h3>
+        <p>
+          Yashwantrao Chavan College of Science, Karad
+          Karad-Masur Road, Vidyanagar, KARAD – 415124
+          District : Satara
+          Maharashtra
+          Email : prinyccsk@gmail.com
+          Tel No. 02164 271356 / 271357
+          Tele Fax No.: 02164-271356
+        </p>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Contact Form -->
+    <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+    <div class="row">
+      <div class="col-lg-8 mb-4">
+        <h3>Send us a Message</h3>
+        <form name="sentMessage" id="contactForm" method="post" action="/contact" validate>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>Full Name:</label>
+              <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name." name="_name">
+              <p class="help-block"></p>
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>Phone Number:</label>
+              <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number." name="_phone">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>Email Address:</label>
+              <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address." name="_email">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>Message:</label>
+              <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" name="message"></textarea>
+            </div>
+          </div>
+          <div id="success"></div>
+          <!-- For success/fail messages -->
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+{% endblock %}

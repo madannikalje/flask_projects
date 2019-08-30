@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<h3 align="center"> Admin panel </h3>
+
+<div class="container">
+  <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+          </div>
+  <a href="/logout" class="btn btn-primary">logout</a>
+  <br>
+  <br>
+  <a href="/addblog" class="btn btn-primary">add blog</a>
+  <form class="" action="/uploader" method="post" enctype="multipart/form-data">
+    <br>
+    <input type="file" name="file1" value="" >
+    <button class="btn btn-dark  type="submit" name="button" >Upload</button>
+  </form>
+
+</div>
+
+<br>
+
+<div class="container">
+  <h2>Blog Edit</h2>
+  <p></p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>TITLR</th>
+        <th>DATE</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    {% for post in _post %}
+    <tbody>
+      <tr>
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+          <td>{{post.date}}</td>
+        <th><a href="/edit_post/{{post.id}}"><button type="button" class="btn btn-dark">Edit</button></a></th>
+        <th><a href="/delete_post/{{post.id}}"><button type="button" class="btn btn-dark">Delete</button></a></th>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}

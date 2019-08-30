@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block body %}
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('{{url_for('static',filename='img1.jpg')}}')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Yashwantrao Chavan College of Science, Karad.</h3>
+            <p>Accredited B by NAAC</p>
+          </div>
+        </div>
+        <!-- Slide Two - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('{{url_for('static',filename='img2.jpg')}}')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Yashwantrao Chavan College of Science, Karad.</h3>
+            <p>Accredited B by NAAC</p>
+          </div>
+        </div>
+        <!-- Slide Three - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('{{url_for('static',filename='img3.jpg')}}')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Yashwantrao Chavan College of Science, Karad.</h3>
+            <p>Accredited B by NAAC</p>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <h1 class="my-4">Welcome to Yashwantrao Chavan College of Science, Karad.</h1>
+
+    <!-- Marketing Icons Section -->
+    <p>Shri Shivaji Education Society, Karad, founded by Late Hon. Shri Yashwantrao Chavan, former Deputy Prime Minister of India, esablished this college in June 1958 as Science College Karad with an objective of providing education in science to students of the Karad area in Maharashtra. To keep his memory alive, the college was renamed after him in 1986. The college building inaugurated in 1960 by the then President of India, Dr. Rajendra Prasad is located in a sprawling campus of around 40 acres and has flourished under the able stewardship of Late Hon. Shri P. D. Patil. Today Yashwantrao Chavan College of Science, Karad is one of the premier educational institution in this region.
+</p>
+    <!-- /.row -->
+
+    <!-- Portfolio Section -->
+
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Call to Action Section -->
+
+
+  </div>
+  <!-- /.container -->
+  {% endblock %}
