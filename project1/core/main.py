@@ -28,6 +28,8 @@ class contact(db.Model):
 
     name = db.Column(db.String,nullable=False)
     email = db.Column(db.String,nullable=False)
+    time = db.Column(db.Time,nullable=False)
+    date = db.Column(db.Date,nullable=False)
     mobile = db.Column(db.Integer,nullable=False)
     messege = db.Column(db.String,nullable=False)
     serial_no = db.Column(db.Integer, primary_key=True)
@@ -38,15 +40,17 @@ def index():
     if (request.method == 'POST'):
         name=request.form.get('name')
         email=request.form.get('email')
+        date = request.form.get('date')
+        time=request.form.get('time')
         mobile=request.form.get('mobile')
         messege=request.form.get('messege')
 
-        entry = contact(name=name,email=email,mobile=mobile,messege=messege)
+        entry = contact(name=name,email=email,date=date,time=time,mobile=mobile,messege=messege)
         db.session.add(entry)
         db.session.commit()
 
 
-        s.sendmail(email,'madanlal885522@gmail.com','new msg from '+name+'\nemail: '+email+'\nmobile: '+mobile+'\nmessege: '+messege)
+        s.sendmail(email,'madanlal885522@gmail.com','new msg from '+name+'\nemail: '+email+'\nmobile: '+mobile+'\nmessege: '+messege+'\ndate :'+date+'\ntime :'+time)
 
         redirect('/')
 
