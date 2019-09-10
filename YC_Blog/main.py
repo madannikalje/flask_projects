@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 #from flask_mail import Mail
 from datetime import datetime
 import os
-from werkzeug import secure_filename
+
 import smtplib
 
 app=Flask(__name__)
