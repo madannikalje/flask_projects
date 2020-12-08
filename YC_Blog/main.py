@@ -8,7 +8,7 @@ import smtplib
 
 app=Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/yc'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/test'
 
 db=SQLAlchemy(app)
 app.secret_key='hYfkC4NvaG58r8bfPX71'
@@ -24,7 +24,7 @@ MAIL_USERNAME= 'madanlal885522@gmail.com',
 MAIL_PASSWORD ='hYfkC4NvaG58r8bfPX71')'''
 
 username = 'admin'
-password = 'hYfkC4NvaG58r8bfPX71'
+password = 'madan12!'
 
 
 class contacts(db.Model):
