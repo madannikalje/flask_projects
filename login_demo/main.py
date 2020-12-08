@@ -38,7 +38,9 @@ def auth():
         else:
             return redirect('/')
 
-    else:
-        return redirect('/')
+    elif request.method == 'POST':
+        return redirect('/logout')
+
+
 
 app.run(debug=True)
