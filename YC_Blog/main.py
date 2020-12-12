@@ -8,7 +8,7 @@ import smtplib
 
 app=Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:madan12!@database-1.ccjzdhmdjmgi.us-east-1.rds.amazonaws.com/db1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://'
 
 db=SQLAlchemy(app)
 app.secret_key='hYfkC4NvaG58r8bfPX71'
