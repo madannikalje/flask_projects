@@ -1,1 +1,96 @@
-hello world 2025-11-26T06:15:27.768-05:00
+import { useRegionUrls } from "@/composables/useRegionConfig"
+import { EUROPE, SAUDI_ARABIA, USA } from "@/core/constants"
+import dataRegionHelperFunction from "@/helper-functions/dataRegionHelperFunctions"
+import { useStore } from "@/store"
+import { ActionTypes as DataregionActions } from "@/store/modules/dataregion/actions"
+import { computed } from "vue"
+import { useRoute } from "vue-router"
+
+const resellerStagingHosts = ["assessments.join-staging.com"]
+
+export default function useOAuth() {
+    const route = useRoute()
+    const store = useStore()
+    const defaultRegion = computed(() => store.getters.getDefaultRegion)
+    const { getRouteRegionParam } = dataRegionHelperFunction()
+    const { getApiDomain, getRegionFromDomain } = useRegionUrls()
+
+    // --- Default API domain ---
+    let API_DOMAIN = "https://api.testlify.com"
+
+    // --- Determine region (string for store/localStorage) ---
+    let regionStr = "Europe" // default
+
+    // 1️⃣ localStorage first (set by route.ts)
+    const storedRegion = localStorage.getItem("data_region")
+    if (storedRegion) {
+        regionStr = storedRegion
+    } else if (defaultRegion.value) {
+        // 2️⃣ Use defaultRegion from store if available
+        regionStr =
+            defaultRegion.value === "EU"
+                ? "Europe"
+                : defaultRegion.value === "KSA"
+                ? "Saudi Arabia"
+                : "United States"
+    } else {
+        // 3️⃣ URL params
+        const urlParams = new URLSearchParams(window.location.search)
+        const rParam = urlParams.get("r")
+        const regionParam = route?.query?.region ?? urlParams.get("region")
+
+        if (regionParam) {
+            regionStr =
+                typeof getRouteRegionParam === "function"
+                    ? getRouteRegionParam()
+                    : regionParam
+        } else if (rParam) {
+            regionStr =
+                rParam === "2"
+                    ? "Saudi Arabia"
+                    : rParam === "3"
+                    ? "United States"
+                    : "Europe"
+        } else {
+            // 4️⃣ fallback to store or domain
+            const dataRegion = store.getters.getSelectedDataRegion
+            regionStr = dataRegion || getRegionFromDomain() || "Europe"
+        }
+    }
+
+    // Persist region in store/localStorage
+    store.dispatch(DataregionActions.SET_SELECTED_DATA_REGION, regionStr)
+    store.dispatch(DataregionActions.SET_MANUALLY_SELECTED, false)
+    localStorage.setItem("data_region", regionStr)
+
+    // --- Map string to constants for getApiDomain ---
+    let regionConst =
+        regionStr === "Europe"
+            ? EUROPE
+            : regionStr === "Saudi Arabia"
+            ? SAUDI_ARABIA
+            : USA
+
+    // --- Compute API domain (override only if necessary) ---
+    API_DOMAIN = getApiDomain(regionConst) || API_DOMAIN
+
+    // Handle staging/reseller overrides
+    if (
+        window.location.href.includes("localhost") ||
+        window.location.href.includes("vercel") ||
+        window.location.hostname.startsWith("192.168.") ||
+        resellerStagingHosts.includes(window.location.host)
+    ) {
+        API_DOMAIN = "https://testlify-api-tf-16706.previews.testlify.dev"
+        if (window.location.href.includes("testlify-git-staging-hnr")) {
+            API_DOMAIN = "https://testlify-api-staging.previews.testlify.dev"
+        }
+        // If you need to connect to api branch uncomment and replace the branch id in the below code
+        // API_DOMAIN = `https://{branchid}.jenkins.testlify.dev`
+        // API_DOMAIN = `https://testlify-api-{branchid}.previews.testlify.dev`
+    }
+
+    const API_PREFIX = `${API_DOMAIN}/v1`
+
+    return { API_PREFIX }
+}
